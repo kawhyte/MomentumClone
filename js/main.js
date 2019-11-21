@@ -38,25 +38,40 @@ function setGreeting() {
   }
 }
 
-//name
+//Get name
 function getName() {
   if (localStorage.getItem("name") === null) {
     name.textContent = "Friend";
   } else {
-    name.textContent = localStorage.getItem('name');
+    name.textContent = localStorage.getItem("name");
   }
 }
-//focus
 
-function getFocus() {
-    if (localStorage.getItem("focus") === null) {
-      focus.textContent = " Be productive";
-    } else {
-      focus.textContent = localStorage.getItem('focus');
+function setName(e) {
+  if (e.type === "keypress") {
+    if (e.which === 13 || e.keyCode === 13) {
+      localStorage.setItem("name", e.target.innerText);
+      name.blur();
     }
+  } else {
+    localStorage.setItem("name", e.target.innerText);
   }
+}
+
+//Get focus
+function getFocus() {
+  if (localStorage.getItem("focus") === null) {
+    focus.textContent = " Be productive";
+  } else {
+    focus.textContent = localStorage.getItem("focus");
+  }
+}
+
+name.addEventListener("keypress", setName);
+name.addEventListener("blur", setName);
+
 //run
 let a = showTime();
 setGreeting();
 getName();
-getFocus()
+getFocus();
