@@ -25,19 +25,38 @@ function showTime() {
 }
 
 //set background
-function setGreetings() {
+function setGreeting() {
   let today = new Date();
   let hour = today.getHours();
 
   if (hour < 12) {
-    greeting.textContent = "Good morning";
+    greeting.textContent = "Good morning, ";
   } else if (hour < 18) {
-    greeting.textContent = "Good afternoon";
+    greeting.textContent = "Good afternoon, ";
   } else {
-    greeting.textContent = "Good evening";
+    greeting.textContent = "Good evening, ";
   }
 }
 
+//name
+function getName() {
+  if (localStorage.getItem("name") === null) {
+    name.textContent = "Friend";
+  } else {
+    name.textContent = localStorage.getItem('name');
+  }
+}
+//focus
+
+function getFocus() {
+    if (localStorage.getItem("focus") === null) {
+      focus.textContent = " Be productive";
+    } else {
+      focus.textContent = localStorage.getItem('focus');
+    }
+  }
 //run
 let a = showTime();
-setGreetings();
+setGreeting();
+getName();
+getFocus()
