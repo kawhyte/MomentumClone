@@ -58,6 +58,15 @@ a {
         transform: translate(-50%, -50%);
     }
 
+    .showcase-top p{
+        position: absolute;
+        /* height: 90px; */
+        width: 100px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
     .showcase-top h2{
         position: absolute;
         top: 50%;

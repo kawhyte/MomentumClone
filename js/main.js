@@ -71,9 +71,10 @@ function showTime() {
   hour = hour % 12 || 12;
 
   //Output
-  time.innerHTML = `${hour}<span>:<span>${addZero(min)}<span>:<span>${addZero(
-    sec
-  )}`;
+//   time.innerHTML = `${hour}<span>:<span>${addZero(min)}<span>:<span>${addZero(
+//     sec
+//   )}`;
+  time.innerHTML = `${hour}<span>:<span>${addZero(min)}`;
 
   setTimeout(showTime, 1000);
 }
