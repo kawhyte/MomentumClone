@@ -2,7 +2,18 @@
 const time = document.getElementById("time");
 const greeting = document.getElementById("greeting");
 const name = document.getElementById("name");
-const focus = document.getElementById("focus");
+//const focus = document.getElementById("focus");
+const mantra = document.getElementById("mantra");
+var mantraData = `quotes.json`;
+`{"text": "mkyong","author": "Kenny"}`;
+
+//var mantraJson = JSON.parse(mantraData);
+
+//   fetch("js/quotes.json")
+//   .then(response => response.json())
+//   .then(json => console.log(json));
+
+//alert(json.name); //mkyong
 
 // show time
 function showTime() {
@@ -19,9 +30,16 @@ function showTime() {
   hour = hour % 12 || 12;
 
   //Output
-  time.innerHTML = `${hour}<span>:<span>${min}<span>:<span>${sec}`;
+  time.innerHTML = `${hour}<span>:<span>${addZero(min)}<span>:<span>${addZero(
+    sec
+  )}`;
 
   setTimeout(showTime, 1000);
+}
+
+//Zero
+function addZero(n) {
+  return (parseInt(n, 10) < 10 ? "0" : "") + n;
 }
 
 //set background
@@ -46,7 +64,7 @@ function getName() {
     name.textContent = localStorage.getItem("name");
   }
 }
-
+//Set name
 function setName(e) {
   if (e.type === "keypress") {
     if (e.which === 13 || e.keyCode === 13) {
@@ -59,19 +77,50 @@ function setName(e) {
 }
 
 //Get focus
-function getFocus() {
-  if (localStorage.getItem("focus") === null) {
-    focus.textContent = " Be productive";
+// function getFocus() {
+//   if (localStorage.getItem("focus") === null) {
+//     focus.textContent = "Be productive";
+//   } else {
+//     focus.textContent = localStorage.getItem("focus");
+//   }
+// }
+
+//set focus
+// function setFocus(e) {
+//   if (e.type === "keypress") {
+//     if (e.which === 13 || e.keyCode === 13) {
+//       localStorage.setItem("focus", e.target.innerText);
+//       focus.blur();
+//     }
+//   } else {
+//     localStorage.setItem("focus", e.target.innerText);
+//   }
+// }
+
+//Get focus
+async function getMantra() {
+  if (mantraData.name === null) {
+    mantra.textContent = "Inhale love. Exhale gratitude.";
   } else {
-    focus.textContent = localStorage.getItem("focus");
+    // mantra.textContent = "Mantra is not null";
+    // mantra.textContent = mantraJson.name;
+
+    const response = await fetch("js/quotes.json");
+    const myJson = await response.json();
+    console.log(JSON.stringify(myJson[0].text));
+    console.log(JSON.stringify(myJson[0].from));
   }
 }
 
 name.addEventListener("keypress", setName);
 name.addEventListener("blur", setName);
+//focus.addEventListener("keypress", setFocus);
+//focus.addEventListener("blur", setFocus);
 
 //run
-let a = showTime();
+showTime();
 setGreeting();
 getName();
-getFocus();
+//getFocus();
+getMantra();
+//foobar()

@@ -3,11 +3,11 @@
     --dark-color: #141414;
 }
 
-*{
+/* *{
     box-sizing: border-box ;
     margin: 0;
     padding: 0;
-}
+} */
 
 body {
  font-family: Helvetica, Arial, sans-serif;
@@ -29,9 +29,9 @@ a {
     text-decoration: none;
 }
 
-p {
+/* p {
     margin: 0.5rem 0;
-}
+} */
 
 
 
@@ -145,6 +145,9 @@ p {
 
 .f6 {
     font-size: .875rem;
+}
+.f-headline-l{
+    font-size: 10em;
 }
 
 .measure {

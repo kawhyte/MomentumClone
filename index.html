@@ -13,6 +13,7 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
 </head>
 
 <body>
@@ -26,23 +27,27 @@
           <h3 class="f6 fw1 lh-title">Summer MMXVI</h3>
         </header>
         <!--  Time and Greeting  -->
-        <time id="time" class="f1 f-headline-l fw1 i white-99"></time>
+        <time id="time" class="helvetica fw7  f-headline-l  "></time>
         <br>
-        <span id="greeting" class="f1 f-headline-l fw1 i white-99"></span>
-        <span id="name" class="f1 f-headline-l fw1 i white-99" contenteditable="true">Kenny</span>
+        <span id="greeting" class="helvetica f1 fw9"></span>
+        <span id="name" class="helvetica f1 fw9 lh-copy ttc bb" contenteditable="true"></span>
 
-        <blockquote class="ph0 mh0 measure f4 lh-copy center">
-          <div>
 
-            <span> My focus today is to: </span>
-            <span id="focus" contenteditable="true"></span>
+        <!-- <div>
+          <p class="helvetica f1 fw9 "> My focus today is to: </p>
+          <span id="focus" class="helvetica f1 fw9 bb" contenteditable="true"></span>
+        </div> -->
+        <div>
+          <!-- <span class="helvetica f1 fw9 ">Today's Mantra: </span> -->
+          <p id="mantra" class="helvetica f1 fw9"></p>
+          <!-- <span id="focus" class="helvetica f1 fw9 bb" contenteditable="true"></span> -->
+        </div>
+        
+        <cite class="f6 ttu tracked fs-normal">Massimo Vignelli</cite>
+        <p class="fw1 white-70">
+          It's the space you put between the notes that make the music.
+        </p>
 
-          </div>
-          <cite class="f6 ttu tracked fs-normal">Massimo Vignelli</cite>
-          <p class="fw1 white-70">
-            It's the space you put between the notes that make the music.
-          </p>
-        </blockquote>
       </div>
     </div>
     <div class="center measure-wide f5 pv5 lh-copy ph2">
