@@ -3,9 +3,9 @@ const time = document.getElementById("time");
 const greeting = document.getElementById("greeting");
 const name = document.getElementById("name");
 //const focus = document.getElementById("focus");
-const mantra = document.getElementById("mantra");
-var mantraData = `quotes.json`;
-`{"text": "mkyong","author": "Kenny"}`;
+const quote = document.getElementById("quote");
+const author = document.getElementById("author");
+
 
 //var mantraJson = JSON.parse(mantraData);
 
@@ -99,9 +99,7 @@ function setName(e) {
 
 //Get focus
 async function getMantra() {
-  if (mantraData.name === null) {
-    mantra.textContent = "Inhale love. Exhale gratitude.";
-  } else {
+    
     const response = await fetch("js/quotes.json");
     const myJson = await response.json();
     const myJsonSize = JSON.stringify(myJson).length;
@@ -109,14 +107,26 @@ async function getMantra() {
     num = Math.floor(Math.random() * Math.floor(100));
     console.log(num);
 
+    if (myJson[num].text === null || myJson[num].from ===null){
+        quote.textContent = "A hero is one who knows how to hang on for one minute longer."
+        author.textContent = "Norwegian proverb"  
+
+    } else {
+
+        quote.textContent = myJson[num].text;
+        author.textContent = myJson[num].from; 
+    }
+//   if ( === null || mantraData.text) {
+//     mantra.textContent = "Inhale love. Exhale gratitude.";
+//   } else {
+
     //var json = JSON.parse(myJson);
 
     //console.log(myJson);
     // console.log(JSON.stringify(myJson[num].from));
     //console.log(JSON.stringify(myJson).length);
-    mantra.textContent = myJson[num].text;
-    //mantra.textContent = myJson[4].from;
-  }
+   
+  //}
 }
 
 name.addEventListener("keypress", setName);
@@ -130,4 +140,6 @@ setGreeting();
 getName();
 //getFocus();
 getMantra();
+
+
 //foobar()
