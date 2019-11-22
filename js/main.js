@@ -102,13 +102,20 @@ async function getMantra() {
   if (mantraData.name === null) {
     mantra.textContent = "Inhale love. Exhale gratitude.";
   } else {
-    // mantra.textContent = "Mantra is not null";
-    // mantra.textContent = mantraJson.name;
-
     const response = await fetch("js/quotes.json");
     const myJson = await response.json();
-    console.log(JSON.stringify(myJson[0].text));
-    console.log(JSON.stringify(myJson[0].from));
+    const myJsonSize = JSON.stringify(myJson).length;
+    console.log(myJsonSize);
+    num = Math.floor(Math.random() * Math.floor(100));
+    console.log(num);
+
+    //var json = JSON.parse(myJson);
+
+    //console.log(myJson);
+    // console.log(JSON.stringify(myJson[num].from));
+    //console.log(JSON.stringify(myJson).length);
+    mantra.textContent = myJson[num].text;
+    //mantra.textContent = myJson[4].from;
   }
 }
 
