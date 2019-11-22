@@ -1,19 +1,60 @@
 // DOM elements
 const time = document.getElementById("time");
 const greeting = document.getElementById("greeting");
-const name = document.getElementById("name");
-//const focus = document.getElementById("focus");
+//const name = document.getElementById("name");
+const focus = document.getElementById("focus");
 const quote = document.getElementById("quote");
 const author = document.getElementById("author");
 
 
-//var mantraJson = JSON.parse(mantraData);
 
-//   fetch("js/quotes.json")
-//   .then(response => response.json())
-//   .then(json => console.log(json));
 
-//alert(json.name); //mkyong
+// function getTimeRemaining(endtime) {
+//   var t = Date.parse(endtime) - Date.parse(new Date());
+//   var seconds = Math.floor((t / 1000) % 60);
+//   var minutes = Math.floor((t / 1000 / 60) % 60);
+//   var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+//   var days = Math.floor(t / (1000 * 60 * 60 * 24));
+//   return {
+//     'total': t,
+//     'days': days,
+//     'hours': hours,
+//     'minutes': minutes,
+//     'seconds': seconds
+//   };
+// }
+
+// function initializeClock(id, endtime) {
+//   var clock = document.getElementById(id);
+//   var daysSpan = clock.querySelector('.days');
+//   var hoursSpan = clock.querySelector('.hours');
+//   var minutesSpan = clock.querySelector('.minutes');
+//   var secondsSpan = clock.querySelector('.seconds');
+// console.log(endtime)
+//   function updateClock() {
+//     var t = getTimeRemaining(endtime);
+
+//     daysSpan.innerHTML = t.days;
+//     hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+//     minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+//     secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+//     if (t.total <= 0) {
+//       clearInterval(timeinterval);
+//     }
+//   }
+
+//   updateClock();
+//   var timeinterval = setInterval(updateClock, 1000);
+// }
+
+// var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+// initializeClock('clockdiv', deadline);
+
+
+
+
+
 
 // show time
 function showTime() {
@@ -48,54 +89,54 @@ function setGreeting() {
   let hour = today.getHours();
 
   if (hour < 12) {
-    greeting.textContent = "Good morning, ";
+    greeting.textContent = "Good morning!";
   } else if (hour < 18) {
-    greeting.textContent = "Good afternoon, ";
+    greeting.textContent = "Good afternoon!";
   } else {
-    greeting.textContent = "Good evening, ";
+    greeting.textContent = "Good evening!";
   }
 }
 
 //Get name
-function getName() {
-  if (localStorage.getItem("name") === null) {
-    name.textContent = "Friend";
-  } else {
-    name.textContent = localStorage.getItem("name");
-  }
-}
-//Set name
-function setName(e) {
-  if (e.type === "keypress") {
-    if (e.which === 13 || e.keyCode === 13) {
-      localStorage.setItem("name", e.target.innerText);
-      name.blur();
-    }
-  } else {
-    localStorage.setItem("name", e.target.innerText);
-  }
-}
-
-//Get focus
-// function getFocus() {
-//   if (localStorage.getItem("focus") === null) {
-//     focus.textContent = "Be productive";
+// function getName() {
+//   if (localStorage.getItem("name") === null) {
+//     name.textContent = "Friend";
 //   } else {
-//     focus.textContent = localStorage.getItem("focus");
+//     name.textContent = localStorage.getItem("name");
 //   }
 // }
-
-//set focus
-// function setFocus(e) {
+//Set name
+// function setName(e) {
 //   if (e.type === "keypress") {
 //     if (e.which === 13 || e.keyCode === 13) {
-//       localStorage.setItem("focus", e.target.innerText);
-//       focus.blur();
+//       localStorage.setItem("name", e.target.innerText);
+//       name.blur();
 //     }
 //   } else {
-//     localStorage.setItem("focus", e.target.innerText);
+//     localStorage.setItem("name", e.target.innerText);
 //   }
 // }
+
+//Get focus
+function getFocus() {
+  if (localStorage.getItem("focus") === null) {
+    focus.textContent = "Complete Node.js Tutorial";
+  } else {
+    focus.textContent = localStorage.getItem("focus");
+  }
+}
+
+//set focus
+function setFocus(e) {
+  if (e.type === "keypress") {
+    if (e.which === 13 || e.keyCode === 13) {
+      localStorage.setItem("focus", e.target.innerText);
+      focus.blur();
+    }
+  } else {
+    localStorage.setItem("focus", e.target.innerText);
+  }
+}
 
 //Get focus
 async function getMantra() {
@@ -129,16 +170,16 @@ async function getMantra() {
   //}
 }
 
-name.addEventListener("keypress", setName);
-name.addEventListener("blur", setName);
-//focus.addEventListener("keypress", setFocus);
-//focus.addEventListener("blur", setFocus);
+//name.addEventListener("keypress", setName);
+//name.addEventListener("blur", setName);
+focus.addEventListener("keypress", setFocus);
+focus.addEventListener("blur", setFocus);
 
 //run
 showTime();
 setGreeting();
-getName();
-//getFocus();
+//getName();
+getFocus();
 getMantra();
 
 
