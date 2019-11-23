@@ -1,6 +1,7 @@
 // DOM elements
 const time = document.getElementById("time");
 const greeting = document.getElementById("greeting");
+const mainIcon = document.getElementById("main-icon");
 //const name = document.getElementById("name");
 const focus = document.getElementById("focus");
 const quote = document.getElementById("quote");
@@ -91,10 +92,13 @@ function setGreeting() {
 
   if (hour < 12) {
     greeting.textContent = "Good morning!";
+    mainIcon.src = `img/ante-meridiem.svg`
   } else if (hour < 18) {
     greeting.textContent = "Good afternoon!";
+    mainIcon.src = `img/post-meridiem.svg`
   } else {
     greeting.textContent = "Good evening!";
+    mainIcon.src = `img/post-meridiem_evening.svg`
   }
 }
 
