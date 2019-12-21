@@ -130,7 +130,7 @@ async function getMantra() {
 
     } else {
 
-        quote.textContent = myJson[num].text;
+        quote.textContent =  '"' + (myJson[num].text) + '"' + " ~ " + myJson[num].from;
         author.textContent = myJson[num].from; 
     }
 //   if ( === null || mantraData.text) {
