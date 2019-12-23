@@ -1,11 +1,59 @@
 // DOM elements
 const time = document.getElementById("time");
-//const greeting = document.getElementById("greeting");
+const greeting = document.getElementById("greeting");
 const mainIcon = document.getElementById("main-icon");
 //const name = document.getElementById("name");
 const focus = document.getElementById("focus");
 const quote = document.getElementById("quote");
 const author = document.getElementById("author");
+
+
+
+
+// function getTimeRemaining(endtime) {
+//   var t = Date.parse(endtime) - Date.parse(new Date());
+//   var seconds = Math.floor((t / 1000) % 60);
+//   var minutes = Math.floor((t / 1000 / 60) % 60);
+//   var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+//   var days = Math.floor(t / (1000 * 60 * 60 * 24));
+//   return {
+//     'total': t,
+//     'days': days,
+//     'hours': hours,
+//     'minutes': minutes,
+//     'seconds': seconds
+//   };
+// }
+
+// function initializeClock(id, endtime) {
+//   var clock = document.getElementById(id);
+//   var daysSpan = clock.querySelector('.days');
+//   var hoursSpan = clock.querySelector('.hours');
+//   var minutesSpan = clock.querySelector('.minutes');
+//   var secondsSpan = clock.querySelector('.seconds');
+// console.log(endtime)
+//   function updateClock() {
+//     var t = getTimeRemaining(endtime);
+
+//     daysSpan.innerHTML = t.days;
+//     hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+//     minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+//     secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+//     if (t.total <= 0) {
+//       clearInterval(timeinterval);
+//     }
+//   }
+
+//   updateClock();
+//   var timeinterval = setInterval(updateClock, 1000);
+// }
+
+// var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+// initializeClock('clockdiv', deadline);
+
+
+
 
 
 
@@ -27,13 +75,9 @@ function showTime() {
 //   time.innerHTML = `${hour}<span>:<span>${addZero(min)}<span>:<span>${addZero(
 //     sec
 //   )}`;
-  time.innerHTML = `${hour}<span>:<span>${addZero(min)}<span>
+  time.innerHTML = `${hour}<span>:<span>${addZero(min)}`;
 
-  <img class="manImg" src=${getIcon()}></img>
-  
-  </span>`;
-
-  // setTimeout(showTime, 1000);
+  setTimeout(showTime, 1000);
 }
 
 //Zero
@@ -41,37 +85,22 @@ function addZero(n) {
   return (parseInt(n, 10) < 10 ? "0" : "") + n;
 }
 
-function getIcon() {
+//set background
+function setGreeting() {
   let today = new Date();
   let hour = today.getHours();
+
   if (hour < 12) {
-    //greeting.textContent = "Good morning!";
-    return `img/ante-meridiem.svg`
+    greeting.textContent = "Good morning!";
+    mainIcon.src = `img/ante-meridiem.svg`
   } else if (hour < 18) {
-    //greeting.textContent = "Good afternoon!";
-    return `img/post-meridiem.svg`
+    greeting.textContent = "Good afternoon!";
+    mainIcon.src = `img/post-meridiem.svg`
   } else {
-    //greeting.textContent = "Good evening!";
-    return `img/post-meridiem_evening.svg`
+    greeting.textContent = "Good evening!";
+    mainIcon.src = `img/post-meridiem_evening.svg`
   }
 }
-
-//set background
-// function setGreeting() {
-//   let today = new Date();
-//   let hour = today.getHours();
-
-//   if (hour < 12) {
-//     greeting.textContent = "Good morning!";
-//     mainIcon.src = `img/ante-meridiem.svg`
-//   } else if (hour < 18) {
-//     greeting.textContent = "Good afternoon!";
-//     mainIcon.src = `img/post-meridiem.svg`
-//   } else {
-//     greeting.textContent = "Good evening!";
-//     mainIcon.src = `img/post-meridiem_evening.svg`
-//   }
-// }
 
 //Get name
 // function getName() {
@@ -95,8 +124,8 @@ function getIcon() {
 
 //Get focus
 function getFocus() {
-  if (localStorage.getItem("focus") === null) {
-    focus.textContent = "Complete Node.js Tutorial";
+  if (localStorage.getItem("focus") === null || localStorage.getItem("focus") === "" ) {
+    focus.textContent = "Please add a task";
   } else {
     focus.textContent = localStorage.getItem("focus");
   }
@@ -130,7 +159,7 @@ async function getMantra() {
 
     } else {
 
-        quote.textContent =  '"' + (myJson[num].text) + '"' + " ~ " + myJson[num].from;
+        quote.textContent = myJson[num].text;
         author.textContent = myJson[num].from; 
     }
 //   if ( === null || mantraData.text) {
@@ -153,11 +182,10 @@ focus.addEventListener("blur", setFocus);
 
 //run
 getFocus();
-getMantra();
 showTime();
-//setGreeting();
+setGreeting();
 //getName();
-
+getMantra();
 
 
 //foobar()
