@@ -7,6 +7,10 @@ const focus = document.getElementById("focus");
 const quote = document.getElementById("quote");
 const author = document.getElementById("author");
 
+const temperatureDescription =  document.querySelector(".temperature-decription")
+const temperatureDegree =  document.querySelector(".temperature-degree")
+const locationTimezone=  document.querySelector(".location-timezone")
+
 window.addEventListener("load", () => {
   let long, lat;
   const proxy = "https://cors-anywhere.herokuapp.com/";
@@ -18,9 +22,7 @@ window.addEventListener("load", () => {
       lat = position.coords.latitude;
       api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/${lat},${long}`;
     });
-  } else {
-    h1.textContent = "Not allowed";
-  }
+  } 
 
   fetch(api)
     .then(response => {
@@ -28,8 +30,26 @@ window.addEventListener("load", () => {
     })
     .then(data => {
       console.log(data);
+      const {temperature, summary, icon} = data.currently;
+
+      temperatureDegree.textContent = temperature;
+      temperatureDescription.textContent = summary;
+      locationTimezone.textContent =  data.timezone;
+      // setIcons
+      setIcons(icon,document.querySelector(".icon") );
     });
+
+
+
+ function setIcons(icon, iconID){
+  const skycons = new Skycons({color: "white"});
+  const currentIcon = icon.replace(/-/g, "_").toUpperCase();
+  skycons.play();
+  return skycons.set(iconID, Skycons[currentIcon]);
+ }
+
 });
+
 
 // show time
 function showTime() {
