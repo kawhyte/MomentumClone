@@ -1,61 +1,35 @@
 // DOM elements
 const time = document.getElementById("time");
 const greeting = document.getElementById("greeting");
-const mainIcon = document.getElementById("main-icon");
+// const mainIcon = document.getElementById("main-icon");
 //const name = document.getElementById("name");
 const focus = document.getElementById("focus");
 const quote = document.getElementById("quote");
 const author = document.getElementById("author");
 
+window.addEventListener("load", () => {
+  let long, lat;
+  const proxy = "https://cors-anywhere.herokuapp.com/";
+  let api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/37.8267,-122.4233`;
 
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      long = position.coords.longitude;
+      lat = position.coords.latitude;
+      api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/${lat},${long}`;
+    });
+  } else {
+    h1.textContent = "Not allowed";
+  }
 
-
-// function getTimeRemaining(endtime) {
-//   var t = Date.parse(endtime) - Date.parse(new Date());
-//   var seconds = Math.floor((t / 1000) % 60);
-//   var minutes = Math.floor((t / 1000 / 60) % 60);
-//   var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-//   var days = Math.floor(t / (1000 * 60 * 60 * 24));
-//   return {
-//     'total': t,
-//     'days': days,
-//     'hours': hours,
-//     'minutes': minutes,
-//     'seconds': seconds
-//   };
-// }
-
-// function initializeClock(id, endtime) {
-//   var clock = document.getElementById(id);
-//   var daysSpan = clock.querySelector('.days');
-//   var hoursSpan = clock.querySelector('.hours');
-//   var minutesSpan = clock.querySelector('.minutes');
-//   var secondsSpan = clock.querySelector('.seconds');
-// console.log(endtime)
-//   function updateClock() {
-//     var t = getTimeRemaining(endtime);
-
-//     daysSpan.innerHTML = t.days;
-//     hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-//     minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-//     secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-
-//     if (t.total <= 0) {
-//       clearInterval(timeinterval);
-//     }
-//   }
-
-//   updateClock();
-//   var timeinterval = setInterval(updateClock, 1000);
-// }
-
-// var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
-// initializeClock('clockdiv', deadline);
-
-
-
-
-
+  fetch(api)
+    .then(response => {
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+    });
+});
 
 // show time
 function showTime() {
@@ -72,9 +46,9 @@ function showTime() {
   hour = hour % 12 || 12;
 
   //Output
-//   time.innerHTML = `${hour}<span>:<span>${addZero(min)}<span>:<span>${addZero(
-//     sec
-//   )}`;
+  //   time.innerHTML = `${hour}<span>:<span>${addZero(min)}<span>:<span>${addZero(
+  //     sec
+  //   )}`;
   time.innerHTML = `${hour}<span>:<span>${addZero(min)}`;
 
   setTimeout(showTime, 1000);
@@ -92,13 +66,13 @@ function setGreeting() {
 
   if (hour < 12) {
     greeting.textContent = "Good morning!";
-    mainIcon.src = `img/ante-meridiem.svg`
+    // mainIcon.src = `img/ante-meridiem.svg`
   } else if (hour < 18) {
     greeting.textContent = "Good afternoon!";
-    mainIcon.src = `img/post-meridiem.svg`
+    // mainIcon.src = `img/post-meridiem.svg`
   } else {
     greeting.textContent = "Good evening!";
-    mainIcon.src = `img/post-meridiem_evening.svg`
+    // mainIcon.src = `img/post-meridiem_evening.svg`
   }
 }
 
@@ -124,7 +98,10 @@ function setGreeting() {
 
 //Get focus
 function getFocus() {
-  if (localStorage.getItem("focus") === null || localStorage.getItem("focus") === "" ) {
+  if (
+    localStorage.getItem("focus") === null ||
+    localStorage.getItem("focus") === ""
+  ) {
     focus.textContent = "Please add a task";
   } else {
     focus.textContent = localStorage.getItem("focus");
@@ -145,33 +122,31 @@ function setFocus(e) {
 
 //Get focus
 async function getMantra() {
-    
-    const response = await fetch("js/quotes.json");
-    const myJson = await response.json();
-    const myJsonSize = JSON.stringify(myJson).length;
-    console.log(myJsonSize);
-    num = Math.floor(Math.random() * Math.floor(100));
-    console.log(num);
+  const response = await fetch("js/quotes.json");
+  const myJson = await response.json();
+  const myJsonSize = JSON.stringify(myJson).length;
+  console.log(myJsonSize);
+  num = Math.floor(Math.random() * Math.floor(100));
+  console.log(num);
 
-    if (myJson[num].text === null || myJson[num].from ===null){
-        quote.textContent = "A hero is one who knows how to hang on for one minute longer."
-        author.textContent = "Norwegian proverb"  
+  if (myJson[num].text === null || myJson[num].from === null) {
+    quote.textContent =
+      "A hero is one who knows how to hang on for one minute longer.";
+    author.textContent = "Norwegian proverb";
+  } else {
+    quote.textContent = myJson[num].text;
+    author.textContent = myJson[num].from;
+  }
+  //   if ( === null || mantraData.text) {
+  //     mantra.textContent = "Inhale love. Exhale gratitude.";
+  //   } else {
 
-    } else {
+  //var json = JSON.parse(myJson);
 
-        quote.textContent = myJson[num].text;
-        author.textContent = myJson[num].from; 
-    }
-//   if ( === null || mantraData.text) {
-//     mantra.textContent = "Inhale love. Exhale gratitude.";
-//   } else {
+  //console.log(myJson);
+  // console.log(JSON.stringify(myJson[num].from));
+  //console.log(JSON.stringify(myJson).length);
 
-    //var json = JSON.parse(myJson);
-
-    //console.log(myJson);
-    // console.log(JSON.stringify(myJson[num].from));
-    //console.log(JSON.stringify(myJson).length);
-   
   //}
 }
 
@@ -186,6 +161,5 @@ showTime();
 setGreeting();
 //getName();
 getMantra();
-
 
 //foobar()
