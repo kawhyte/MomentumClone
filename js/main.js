@@ -7,9 +7,14 @@ const focus = document.getElementById("focus");
 const quote = document.getElementById("quote");
 const author = document.getElementById("author");
 
-const temperatureDescription =  document.querySelector(".temperature-decription")
-const temperatureDegree =  document.querySelector(".temperature-degree")
-const locationTimezone=  document.querySelector(".location-timezone")
+const temperatureDescription = document.querySelector(
+  ".temperature-decription"
+);
+const temperatureDegree = document.querySelector(".temperature-degree");
+const locationTimezone = document.querySelector(".location-timezone");
+const temperatureSection = document.querySelector(".temperature");
+const temperatureSpan = document.querySelector(".temperature span");
+const temperatureF = document.querySelector(".degree-section > span:nth-child(2)");
 
 window.addEventListener("load", () => {
   let long, lat;
@@ -22,7 +27,7 @@ window.addEventListener("load", () => {
       lat = position.coords.latitude;
       api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/${lat},${long}`;
     });
-  } 
+  }
 
   fetch(api)
     .then(response => {
@@ -30,26 +35,37 @@ window.addEventListener("load", () => {
     })
     .then(data => {
       console.log(data);
-      const {temperature, summary, icon} = data.currently;
+      const { temperature, summary, icon } = data.currently;
 
-      temperatureDegree.textContent = temperature;
+      temperatureDegree.textContent = Math.round(temperature);
       temperatureDescription.textContent = summary;
-      locationTimezone.textContent =  data.timezone;
+      locationTimezone.textContent = data.timezone;
       // setIcons
-      setIcons(icon,document.querySelector(".icon") );
+      setIcons(icon, document.querySelector(".icon"));
+
+      
+
+      let celsious =  Math.round((temperature - 32) * (5/9));
+
+      temperatureF.addEventListener('click', () => {
+        console.log(temperatureF)
+        if (temperatureF.innerHTML === "F") {
+          temperatureSpan.textContent = "C";
+          temperatureDegree.innerHTML = celsious
+        } else if (temperatureF.innerHTML === "C") {
+          temperatureSpan.textContent = "F";
+          temperatureDegree.innerHTML  = Math.round(temperature);
+        }
+      });
     });
 
-
-
- function setIcons(icon, iconID){
-  const skycons = new Skycons({color: "white"});
-  const currentIcon = icon.replace(/-/g, "_").toUpperCase();
-  skycons.play();
-  return skycons.set(iconID, Skycons[currentIcon]);
- }
-
+  function setIcons(icon, iconID) {
+    const skycons = new Skycons({ color: "white" });
+    const currentIcon = icon.replace(/-/g, "_").toUpperCase();
+    skycons.play();
+    return skycons.set(iconID, Skycons[currentIcon]);
+  }
 });
-
 
 // show time
 function showTime() {
