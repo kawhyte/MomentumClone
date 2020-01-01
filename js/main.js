@@ -14,20 +14,23 @@ const temperatureDegree = document.querySelector(".temperature-degree");
 const locationTimezone = document.querySelector(".location-timezone");
 const temperatureSection = document.querySelector(".temperature");
 const temperatureSpan = document.querySelector(".temperature span");
-const temperatureF = document.querySelector(".degree-section > span:nth-child(2)");
+const temperatureF = document.querySelector(".degree-section > span");
+const newTime = document.querySelector(".new-time");
 
 window.addEventListener("load", () => {
   let long, lat;
   const proxy = "https://cors-anywhere.herokuapp.com/";
-  let api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/37.8267,-122.4233`;
+  let api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/39.530895,-119.814972`;
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
-      long = position.coords.longitude;
-      lat = position.coords.latitude;
-      api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/${lat},${long}`;
-    });
-  }
+  // if (navigator.geolocation) {
+  //   navigator.geolocation.getCurrentPosition(position => {
+  //     // long = position.coords.longitude;
+  //     // lat = position.coords.latitude;
+      
+  //     // api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/${lat},${long}`;
+  //     api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/${-119.814972},${-119.814972}`;
+  //   });
+  // }
 
   fetch(api)
     .then(response => {
@@ -35,11 +38,27 @@ window.addEventListener("load", () => {
     })
     .then(data => {
       console.log(data);
-      const { temperature, summary, icon } = data.currently;
+      // const { temperature, summary, icon } = data.currently;
+      const { temperature, time } = data.currently;
+      const {summary, icon} =  data.hourly 
 
       temperatureDegree.textContent = Math.round(temperature);
       temperatureDescription.textContent = summary;
       locationTimezone.textContent = data.timezone;
+
+      // Time
+      localTime =  new Date(time);
+      // const amPm = hour >= 12 ? "PM" : "AM";
+     let hour  = localTime.getHours()
+     let minutes = localTime.getMinutes() 
+      // 12 Format
+      hour = hour % 12 || 12;
+      console.log(hour)
+
+      newTime.innerHTML = `${hour}<span>:</span>${minutes} <span>${(hour < 18 && hour > 12)? " AM":" PM" }</span>`
+
+      console.log(localTime)
+      console.log(localTime.getMinutes())
       // setIcons
       setIcons(icon, document.querySelector(".icon"));
 
@@ -70,7 +89,7 @@ window.addEventListener("load", () => {
 // show time
 function showTime() {
   let today = new Date();
-  //timey = today.getTime,
+ 
   let hour = today.getHours();
   let min = today.getMinutes();
   let sec = today.getSeconds();
@@ -85,7 +104,7 @@ function showTime() {
   //   time.innerHTML = `${hour}<span>:<span>${addZero(min)}<span>:<span>${addZero(
   //     sec
   //   )}`;
-  time.innerHTML = `${hour}<span>:<span>${addZero(min)}`;
+  time.innerHTML = `${hour}<span>:<span>${addZero(min)}<span>${(hour < 18 && hour > 12)? " AM":" PM" }</span>`;
 
   setTimeout(showTime, 1000);
 }
@@ -94,6 +113,20 @@ function showTime() {
 function addZero(n) {
   return (parseInt(n, 10) < 10 ? "0" : "") + n;
 }
+//  set time
+// function setAMPM(){
+//   if (hour < 12) {
+//   greeting.textContent = "Good morning!";
+//   mainIcon.src = `img/ante-meridiem.svg`
+// } else if (hour < 18) {
+//   greeting.textContent = "Good afternoon!";
+//   mainIcon.src = `img/post-meridiem.svg`
+// } else {
+//   greeting.textContent = "Good evening!";
+//   mainIcon.src = `img/post-meridiem_evening.svg`
+// }
+// }
+
 
 //set background
 function setGreeting() {
@@ -192,6 +225,7 @@ focus.addEventListener("keypress", setFocus);
 focus.addEventListener("blur", setFocus);
 
 //run
+// setAMPM();
 getFocus();
 showTime();
 setGreeting();
