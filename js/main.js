@@ -17,7 +17,6 @@ const temperatureSpan = document.querySelector(".temperature span");
 const temperatureF = document.querySelector(".degree-section > span");
 const newTime = document.querySelector(".new-time");
 
-
 window.addEventListener("load", () => {
   let long, lat;
   const proxy = "https://cors-anywhere.herokuapp.com/";
@@ -27,7 +26,7 @@ window.addEventListener("load", () => {
   //   navigator.geolocation.getCurrentPosition(position => {
   //     // long = position.coords.longitude;
   //     // lat = position.coords.latitude;
-      
+
   //     // api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/${lat},${long}`;
   //     api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/${-119.814972},${-119.814972}`;
   //   });
@@ -41,76 +40,138 @@ window.addEventListener("load", () => {
       console.log(data);
       // const { temperature, summary, icon } = data.currently;
       const { temperature, time } = data.currently;
-      const {summary, icon} =  data.hourly 
+      const { summary, icon } = data.hourly;
 
       temperatureDegree.textContent = Math.round(temperature);
       temperatureDescription.textContent = summary;
       locationTimezone.textContent = data.timezone;
 
       // Time
-      localTime =  new Date(time);
+      localTime = new Date(time);
       // const amPm = hour >= 12 ? "PM" : "AM";
-     let hour  = localTime.getHours()
-     let minutes = localTime.getMinutes() 
+      let hour = localTime.getHours();
+      let minutes = localTime.getMinutes();
       // 12 Format
       hour = hour % 12 || 12;
-      console.log(hour)
+      console.log(hour);
+      newTime.innerHTML = `${hour}<span>:</span>${minutes} <span>${
+        hour < 18 && hour > 12 ? " AM" : " PM"
+      }</span>`;
 
-      newTime.innerHTML = `${hour}<span>:</span>${minutes} <span>${(hour < 18 && hour > 12)? " AM":" PM" }</span>`
+      console.log(icon);
+      let newword = icon.replace(/-/g, " ").toUpperCase();
+      console.log(newword);
+      console.log(wordInString(newword, "cloudy"));
 
-      
+      if (wordInString(newword, "cloudy")) {
+        setInterval(drawFlakes, 30);
+      }
       // setIcons
       setIcons(icon, document.querySelector(".icon"));
 
-       console.log(icon);
+      let celsius = Math.round((temperature - 32) * (5 / 9));
 
-      let celsious =  Math.round((temperature - 32) * (5/9));
-
-      temperatureF.addEventListener('click', () => {
-        console.log(temperatureF)
+      temperatureF.addEventListener("click", () => {
+        console.log(temperatureF);
         if (temperatureF.innerHTML === "F") {
           temperatureSpan.textContent = "C";
-          temperatureDegree.innerHTML = celsious
+          temperatureDegree.innerHTML = celsius;
         } else if (temperatureF.innerHTML === "C") {
           temperatureSpan.textContent = "F";
-          temperatureDegree.innerHTML  = Math.round(temperature);
+          temperatureDegree.innerHTML = Math.round(temperature);
         }
       });
     });
 
+  // set skycons image
   function setIcons(icon, iconID) {
     const skycons = new Skycons({ color: "white" });
     const currentIcon = icon.replace(/-/g, "_").toUpperCase();
     skycons.play();
     return skycons.set(iconID, Skycons[currentIcon]);
   }
+
+  function wordInString(s, word) {
+    return new RegExp("\\b" + word + "\\b", "i").test(s);
+  }
+
+  /// Snow effect  //
+
+  //Snow effect
+  let canvas = document.getElementById("sky");
+  let ctx = canvas.getContext("2d");
+
+  let W = window.innerWidth;
+  let H = window.innerHeight;
+
+  canvas.width = W;
+  canvas.height = H;
+
+  let mf = 100;
+  let flakes = [];
+
+  for (let i = 0; i < mf; i++) {
+    flakes.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 5 + 2,
+      d: Math.random() + 1
+    });
+  }
+  // draw flakes
+  function drawFlakes() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    for (let i = 0; i < mf; i++) {
+      let f = flakes[i];
+      ctx.moveTo(f.x, f.y);
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
+    }
+    ctx.fill();
+    moveFlakes();
+  }
+
+  // animate flakes
+  let angle = 0;
+
+  function moveFlakes() {
+    angle += 0.01;
+    for (let i = 0; i < mf; i++) {
+      let f = flakes[i];
+
+      f.y += Math.pow(f.d, 2) + 1;
+      f.x += Math.sin(angle) * 2;
+
+      if (f.y > H) {
+        flakes[i] = { x: Math.random() * W, y: 0, r: f.r, d: f.d };
+      }
+    }
+  }
 });
 
+// // show time
+// function showTime() {
+//   let today = new Date();
 
+//   let hour = today.getHours();
+//   let min = today.getMinutes();
+//   let sec = today.getSeconds();
 
+//   //set AM or PM
+//   const amPm = hour >= 12 ? "PM" : "AM";
 
-// show time
-function showTime() {
-  let today = new Date();
- 
-  let hour = today.getHours();
-  let min = today.getMinutes();
-  let sec = today.getSeconds();
+//   // 12 Format
+//   hour = hour % 12 || 12;
 
-  //set AM or PM
-  const amPm = hour >= 12 ? "PM" : "AM";
+//   //Output
+//   //   time.innerHTML = `${hour}<span>:<span>${addZero(min)}<span>:<span>${addZero(
+//   //     sec
+//   //   )}`;
+//   time.innerHTML = `${hour}<span>:<span>${addZero(min)}<span>${(hour < 18 && hour > 12)? " AM":" PM" }</span>`;
 
-  // 12 Format
-  hour = hour % 12 || 12;
-
-  //Output
-  //   time.innerHTML = `${hour}<span>:<span>${addZero(min)}<span>:<span>${addZero(
-  //     sec
-  //   )}`;
-  time.innerHTML = `${hour}<span>:<span>${addZero(min)}<span>${(hour < 18 && hour > 12)? " AM":" PM" }</span>`;
-
-  setTimeout(showTime, 1000);
-}
+//   setTimeout(showTime, 1000);
+// }
 
 //Zero
 function addZero(n) {
@@ -129,7 +190,6 @@ function addZero(n) {
 //   mainIcon.src = `img/post-meridiem_evening.svg`
 // }
 // }
-
 
 //set background
 function setGreeting() {
@@ -231,9 +291,8 @@ async function getMantra() {
 getMantra();
 // setAMPM();
 // getFocus();
-showTime();
+// showTime();
 setGreeting();
 //getName();
-
 
 //foobar()

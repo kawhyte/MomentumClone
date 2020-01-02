@@ -1,8 +1,5 @@
 window.onload =  function() {
 
-
-
-
 //Snow effect
 let canvas = document.getElementById("sky");
 let ctx =  canvas.getContext("2d");
