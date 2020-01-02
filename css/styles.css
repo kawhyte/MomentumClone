@@ -164,7 +164,12 @@ padding: 1px;
 margin: 1px;
 
 }
-
+.snow{
+    z-index: 10;
+    position: absolute;
+    height: 98vh;
+    /* display:block; */
+}
 .showcase {
 
     /* background: rgba(0, 0, 0, .1);

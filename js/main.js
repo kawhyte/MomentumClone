@@ -17,6 +17,7 @@ const temperatureSpan = document.querySelector(".temperature span");
 const temperatureF = document.querySelector(".degree-section > span");
 const newTime = document.querySelector(".new-time");
 
+
 window.addEventListener("load", () => {
   let long, lat;
   const proxy = "https://cors-anywhere.herokuapp.com/";
@@ -57,12 +58,11 @@ window.addEventListener("load", () => {
 
       newTime.innerHTML = `${hour}<span>:</span>${minutes} <span>${(hour < 18 && hour > 12)? " AM":" PM" }</span>`
 
-      console.log(localTime)
-      console.log(localTime.getMinutes())
+      
       // setIcons
       setIcons(icon, document.querySelector(".icon"));
 
-      
+       console.log(icon);
 
       let celsious =  Math.round((temperature - 32) * (5/9));
 
@@ -85,6 +85,9 @@ window.addEventListener("load", () => {
     return skycons.set(iconID, Skycons[currentIcon]);
   }
 });
+
+
+
 
 // show time
 function showTime() {
