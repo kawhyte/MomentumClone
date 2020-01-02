@@ -94,7 +94,6 @@ footer {
     align-items: center;
     max-height: 80px;
     min-height: 80px;
-
     border-style: solid;
     border-color: rgb(38, 207, 4);
 
@@ -105,9 +104,8 @@ footer {
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
-
-    max-height: 50px;
-    min-height: 20px;
+    max-height: 80px;
+    min-height: 80px;
     border-style: solid;
     border-color: rgb(38, 207, 4);
     flex-direction: column;
@@ -119,7 +117,6 @@ footer {
 
 .temperature-degree {
     padding: 10px;
-
 }
 
 .degree-section {
@@ -128,13 +125,11 @@ footer {
     cursor: pointer;
     border-style: solid;
     border-color: blueviolet;
-
 }
 
 .degree-section span {
     margin-left: 5px;
     font-size: 20px;
-
 }
 
 .time-section {
@@ -159,6 +154,14 @@ footer {
     flex-direction: column;
     max-height: 50px;
     min-height: 20px;
+
+}
+
+.footer-section{
+border-style: dotted;
+border-color: aqua;
+padding: 1px;
+margin: 1px;
 
 }
 

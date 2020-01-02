@@ -166,28 +166,28 @@ function setGreeting() {
 // }
 
 //Get focus
-function getFocus() {
-  if (
-    localStorage.getItem("focus") === null ||
-    localStorage.getItem("focus") === ""
-  ) {
-    focus.textContent = "Please add a task";
-  } else {
-    focus.textContent = localStorage.getItem("focus");
-  }
-}
+// function getFocus() {
+//   if (
+//     localStorage.getItem("focus") === null ||
+//     localStorage.getItem("focus") === ""
+//   ) {
+//     focus.textContent = "Please add a task";
+//   } else {
+//     focus.textContent = localStorage.getItem("focus");
+//   }
+// }
 
 //set focus
-function setFocus(e) {
-  if (e.type === "keypress") {
-    if (e.which === 13 || e.keyCode === 13) {
-      localStorage.setItem("focus", e.target.innerText);
-      focus.blur();
-    }
-  } else {
-    localStorage.setItem("focus", e.target.innerText);
-  }
-}
+// function setFocus(e) {
+//   if (e.type === "keypress") {
+//     if (e.which === 13 || e.keyCode === 13) {
+//       localStorage.setItem("focus", e.target.innerText);
+//       focus.blur();
+//     }
+//   } else {
+//     localStorage.setItem("focus", e.target.innerText);
+//   }
+// }
 
 //Get focus
 async function getMantra() {
@@ -221,15 +221,16 @@ async function getMantra() {
 
 //name.addEventListener("keypress", setName);
 //name.addEventListener("blur", setName);
-focus.addEventListener("keypress", setFocus);
-focus.addEventListener("blur", setFocus);
+// focus.addEventListener("keypress", setFocus);
+// focus.addEventListener("blur", setFocus);
 
 //run
+getMantra();
 // setAMPM();
-getFocus();
+// getFocus();
 showTime();
 setGreeting();
 //getName();
-getMantra();
+
 
 //foobar()
