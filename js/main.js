@@ -20,7 +20,7 @@ const newTime = document.querySelector(".new-time");
 window.addEventListener("load", () => {
   let long, lat;
   const proxy = "https://cors-anywhere.herokuapp.com/";
-  let api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/39.530895,-119.814972`;
+  //  let api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/39.530895,-119.814972`;
 
   // if (navigator.geolocation) {
   //   navigator.geolocation.getCurrentPosition(position => {
@@ -31,6 +31,8 @@ window.addEventListener("load", () => {
   //     api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/${-119.814972},${-119.814972}`;
   //   });
   // }
+
+  //document.body.style.backgroundImage = "url('/img/background_night.svg')";
 
   fetch(api)
     .then(response => {

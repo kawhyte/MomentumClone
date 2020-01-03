@@ -51,17 +51,20 @@ img {
 
     grid-template-columns: 200px 1fr 200px;
     grid-template-rows: auto 1fr 123px;
-    grid-gap: 10px;
+    grid-gap: 5px;
 
     overflow: hidden;
-    padding: 20px;
+    padding-top: 10px;
     height: 100vh;
     border-style: solid;
     border-color: red;
 
     /* background: url(https://source.unsplash.com/collection/9279607) no-repeat center/cover; */
-    background: url(/img/city_default_bg.svg) no-repeat center/cover;
+    /* background: url(/img/clear_blue_daytime_sky_bg.svg) no-repeat center/cover; */
 }
+
+
+
 
 
 header {
@@ -181,7 +184,7 @@ margin: 1px;
     position:relative;
 
     height: 80vh;
-    width: 98.6vw;
+    width: 100vw;
     border-style: dotted;
     border-color: pink;
     position: relative;
@@ -211,7 +214,7 @@ margin: 1px;
     margin-right : auto;
     margin-left : auto;
     min-width : 1500px;
-    max-width : 2050px;
+    max-width : auto;
 
 }
 .showcase {

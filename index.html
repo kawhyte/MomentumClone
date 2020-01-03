@@ -1,22 +1,118 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        
-        <script src="" async defer></script>
-    </body>
+
+<html class="no-js">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Weather App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
+</head>
+
+<body>
+
+
+
+
+  <div class="container" style="background: url(/img/clear_blue_daytime_sky_bg.svg) no-repeat center/cover;">
+    
+    <canvas class="snow" id="sky"> </canvas>
+
+  
+    <header>
+
+      <div class="location">
+        <div class="time-location">
+          <div class="time-section">
+            <h2 class="new-time white-90">Time</h2>
+          </div>
+          <div class="h1 location-timezone">Timezone</div>
+        </div>
+
+
+        <!-- <canvas id="icon2" width="128" height="128"></canvas> -->
+        <!-- <p><img class="weather-icon" id="main-icon" src="" alt="weather icon"></p> -->
+        <div class="temperature">
+          <div class="degree-section">
+            <canvas class="icon" width="128" height="128"></canvas>
+            <h2 class="temperature-degree">34</h2>
+            <span>F</span>
+          </div>
+          <div class="temperature-decription">Its cold</div>
+        </div>
+      </div>
+
+    </header>
+
+    <main>
+
+      <div class="city">
+
+       <div class="buildings">
+
+        <img src="/img/buildings.svg" alt="">
+       </div> 
+      </div>
+
+      <!-- <div class="helvetia vh-100 dt w-100 tc white cover"> -->
+      <!-- <div class="dtc v-mid"> -->
+
+      <!-- <div class="showcase-content "> -->
+
+
+
+
+      <!-- <blockquote class="ph0 mh0 measure f4 lh-copy center">
+              <div class="greetings white-90">
+                <h2 id="greeting" class="f1 fw1 white">Greeting</h2>
+                <p class="helvetica f2 fw1 white">What is your task today?</p>
+                <span id="focus" class="helvetica f2 fw1 white bb" contenteditable="true">Task</span>
+                
+                
+                
+                
+                
+              </div>
+              
+              <div class="quotes white v-btm">
+                
+                <cite class="quotes ttc" id="quote">
+                  Quote
+                </cite>
+                <br>
+                <cite id="author" class=" quotes ttc">Massimo Vignelli</cite>
+              </div>
+              
+            </div>
+            
+          </div>
+        </blockquote> -->
+      <!-- </div> -->
+    </main>
+    <footer>
+      <div class="footer-section">
+        <div class="quotes white v-btm">
+          
+          <cite class="quotes ttc" id="quote">
+            Quote
+          </cite>
+          <br>
+          <cite id="author" class=" quotes ttc">Massimo Vignelli</cite>
+        </div>
+      </div>
+    </footer>
+    
+    
+    
+  </div>
+
+
+  <script src="js/main.js" async defer></script>
+  <!-- <script src="js/snow.js" async defer></script> -->
+  <script src="js/skycons.js" async defer></script>
+</body>
+
 </html>
