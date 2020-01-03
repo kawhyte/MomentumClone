@@ -14,27 +14,19 @@
 
 <body>
 
-
-
-
-  <div class="container" style="background: url(/img/clear_blue_daytime_sky_bg.svg) no-repeat center/cover;">
+  <!-- <div class="container" id="bg" style="background: url(/img/clear_blue_daytime_sky_bg.svg) no-repeat center/cover;"> -->
+  <div class="container" id="bg">
     
-    <canvas class="snow" id="sky"> </canvas>
-
-  
+    <!-- <canvas class="snow" id="sky"> </canvas> -->
     <header>
-
       <div class="location">
         <div class="time-location">
           <div class="time-section">
-            <h2 class="new-time white-90">Time</h2>
+            <h2 class="new-time white-90">Retrieving Time...</h2>
           </div>
-          <div class="h1 location-timezone">Timezone</div>
+          <div class="h1 location-timezone">Retrieving Location...</div>
         </div>
 
-
-        <!-- <canvas id="icon2" width="128" height="128"></canvas> -->
-        <!-- <p><img class="weather-icon" id="main-icon" src="" alt="weather icon"></p> -->
         <div class="temperature">
           <div class="degree-section">
             <canvas class="icon" width="128" height="128"></canvas>
@@ -44,18 +36,34 @@
           <div class="temperature-decription">Its cold</div>
         </div>
       </div>
-
     </header>
 
     <main>
+      <div class="main-content-section">
 
-      <div class="city">
-
-       <div class="buildings">
-
+        <div class="greetings white-90">
+          <!-- <h2 id="greeting" class="f1 fw1 white">Greeting</h2> -->
+          <p class="helvetica f2 fw1 white">Current Location: </p>
+          <span id="focus" class="helvetica f2 fw1 white">Reno, NV</span>
+        </div>
+        
+        
+        <div class="city">
+          <div class="buildings">
+            <div class="quotes white-90 center">
+              
+              <cite class="quotes ttc f4 fw1 white" id="quote">
+                Quote
+              </cite>
+              <br>
+              <cite id="author" class=" quotes ttc">Massimo Vignelli</cite>
+            </div>
         <img src="/img/buildings.svg" alt="">
        </div> 
       </div>
+
+      </div>
+      
 
       <!-- <div class="helvetia vh-100 dt w-100 tc white cover"> -->
       <!-- <div class="dtc v-mid"> -->
@@ -65,34 +73,10 @@
 
 
 
-      <!-- <blockquote class="ph0 mh0 measure f4 lh-copy center">
-              <div class="greetings white-90">
-                <h2 id="greeting" class="f1 fw1 white">Greeting</h2>
-                <p class="helvetica f2 fw1 white">What is your task today?</p>
-                <span id="focus" class="helvetica f2 fw1 white bb" contenteditable="true">Task</span>
-                
-                
-                
-                
-                
-              </div>
-              
-              <div class="quotes white v-btm">
-                
-                <cite class="quotes ttc" id="quote">
-                  Quote
-                </cite>
-                <br>
-                <cite id="author" class=" quotes ttc">Massimo Vignelli</cite>
-              </div>
-              
-            </div>
-            
-          </div>
-        </blockquote> -->
-      <!-- </div> -->
+
+       </div> 
     </main>
-    <footer>
+    <!-- <footer>
       <div class="footer-section">
         <div class="quotes white v-btm">
           
@@ -103,10 +87,7 @@
           <cite id="author" class=" quotes ttc">Massimo Vignelli</cite>
         </div>
       </div>
-    </footer>
-    
-    
-    
+    </footer> -->
   </div>
 
 

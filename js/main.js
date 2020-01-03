@@ -2,14 +2,12 @@
 const time = document.getElementById("time");
 const greeting = document.getElementById("greeting");
 // const mainIcon = document.getElementById("main-icon");
+const background_image = document.getElementById("bg").style.background;
 //const name = document.getElementById("name");
 const focus = document.getElementById("focus");
 const quote = document.getElementById("quote");
 const author = document.getElementById("author");
-
-const temperatureDescription = document.querySelector(
-  ".temperature-decription"
-);
+const temperatureDescription = document.querySelector(".temperature-decription");
 const temperatureDegree = document.querySelector(".temperature-degree");
 const locationTimezone = document.querySelector(".location-timezone");
 const temperatureSection = document.querySelector(".temperature");
@@ -20,7 +18,7 @@ const newTime = document.querySelector(".new-time");
 window.addEventListener("load", () => {
   let long, lat;
   const proxy = "https://cors-anywhere.herokuapp.com/";
-  //  let api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/39.530895,-119.814972`;
+  //let api = `${proxy}https://api.darksky.net/forecast/148e03bac53ba45c90e6d64486bc1e62/39.530895,-119.814972`;
 
   // if (navigator.geolocation) {
   //   navigator.geolocation.getCurrentPosition(position => {
@@ -47,17 +45,20 @@ window.addEventListener("load", () => {
       temperatureDegree.textContent = Math.round(temperature);
       temperatureDescription.textContent = summary;
       locationTimezone.textContent = data.timezone;
+      console.log(time * 1000)
 
       // Time
-      localTime = new Date(time);
-      // const amPm = hour >= 12 ? "PM" : "AM";
+      localTime = new Date(time *1000);
       let hour = localTime.getHours();
       let minutes = localTime.getMinutes();
+      console.log(time);
+      console.log(localTime);
+      console.log(hour +":"+ minutes)
       // 12 Format
       hour = hour % 12 || 12;
       console.log(hour);
       newTime.innerHTML = `${hour}<span>:</span>${minutes} <span>${
-        hour < 18 && hour > 12 ? " AM" : " PM"
+        hour < 12 ? " AM" : " PM"
       }</span>`;
 
       console.log(icon);
@@ -66,7 +67,7 @@ window.addEventListener("load", () => {
       console.log(wordInString(newword, "cloudy"));
 
       if (wordInString(newword, "cloudy")) {
-        setInterval(drawFlakes, 30);
+        //setInterval(drawFlakes, 30);
       }
       // setIcons
       setIcons(icon, document.querySelector(".icon"));
@@ -99,7 +100,6 @@ window.addEventListener("load", () => {
 
   /// Snow effect  //
 
-  //Snow effect
   let canvas = document.getElementById("sky");
   let ctx = canvas.getContext("2d");
 
@@ -150,6 +150,27 @@ window.addEventListener("load", () => {
       }
     }
   }
+
+//set background
+function setGreeting() {
+  let today = new Date();
+  let hour = today.getHours();
+
+  if (hour < 12) {
+    // greeting.textContent = "Good morning!";
+    background_image = "url('/img/clear_blue_sky.svg') center/cover";
+    // background_image.style.background = `url(/img/tomato.svg) no-repeat center/cover;`
+  } else if (hour < 18) {
+    // greeting.textContent = "Good afternoon!";
+    // mainIcon.src = `img/post-meridiem.svg`
+  } else {
+    // greeting.textContent = "Good evening!";
+    // mainIcon.src = `img/post-meridiem_evening.svg`
+  }
+}
+
+setGreeting();
+
 });
 
 // // show time
@@ -194,21 +215,21 @@ function addZero(n) {
 // }
 
 //set background
-function setGreeting() {
-  let today = new Date();
-  let hour = today.getHours();
+// function setGreeting() {
+//   let today = new Date();
+//   let hour = today.getHours();
 
-  if (hour < 12) {
-    greeting.textContent = "Good morning!";
-    // mainIcon.src = `img/ante-meridiem.svg`
-  } else if (hour < 18) {
-    greeting.textContent = "Good afternoon!";
-    // mainIcon.src = `img/post-meridiem.svg`
-  } else {
-    greeting.textContent = "Good evening!";
-    // mainIcon.src = `img/post-meridiem_evening.svg`
-  }
-}
+//   if (hour < 12) {
+//     greeting.textContent = "Good morning!";
+//     // mainIcon.src = `img/ante-meridiem.svg`
+//   } else if (hour < 18) {
+//     greeting.textContent = "Good afternoon!";
+//     // mainIcon.src = `img/post-meridiem.svg`
+//   } else {
+//     greeting.textContent = "Good evening!";
+//     // mainIcon.src = `img/post-meridiem_evening.svg`
+//   }
+// }
 
 //Get name
 // function getName() {
@@ -259,9 +280,9 @@ async function getMantra() {
   const response = await fetch("js/quotes.json");
   const myJson = await response.json();
   const myJsonSize = JSON.stringify(myJson).length;
-  console.log(myJsonSize);
+  //console.log(myJsonSize);
   num = Math.floor(Math.random() * Math.floor(100));
-  console.log(num);
+  //console.log(num);
 
   if (myJson[num].text === null || myJson[num].from === null) {
     quote.textContent =
@@ -294,7 +315,7 @@ getMantra();
 // setAMPM();
 // getFocus();
 // showTime();
-setGreeting();
+// setGreeting();
 //getName();
 
 //foobar()

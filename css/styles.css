@@ -46,11 +46,11 @@ img {
 
     grid-template-areas:
         "header header header"
-        "content content content"
-        "footer footer footer";
+        "content content content";
+        /* "footer footer footer"; */
 
     grid-template-columns: 200px 1fr 200px;
-    grid-template-rows: auto 1fr 123px;
+    grid-template-rows: auto 1fr;
     grid-gap: 5px;
 
     overflow: hidden;
@@ -78,6 +78,8 @@ nav {
 
 main {
     grid-area: content;
+    position:absolute;
+    bottom:0;
 }
 
 aside {
@@ -175,6 +177,24 @@ margin: 1px;
     display:block; 
     overflow: hidden;
 }
+
+
+.main-content-section{
+    /* height: 10vh; */
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    /* max-height: 80px;
+    min-height: 80px; */
+    border-style: solid;
+    border-color: rgb(207, 4, 200);
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+
 
 
 .city {
@@ -357,26 +377,31 @@ margin: 1px;
 }
 
 .greetings {
+    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     margin-bottom: 0rem;
     margin-top: 2rem;
+    border-style: solid;
+    border-color: red;
 }
 
 .greetings p {
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 4rem;
+    margin-top:.5rem ;
+    margin-right: 1rem; 
     margin-bottom: 0rem;
+
 }
 
 .greetings span {
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 5rem;
+    /* margin-top: 5rem; */
 }
 
 .buttons {
@@ -390,8 +415,18 @@ margin: 1px;
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 5.5rem;
-    font-size: 1rem;
+    margin-top: 1.5rem;
+  
+    border-style: solid;
+    border-color: red;
+    max-width: 450px;
+    line-height: 30px;
+    overflow-wrap: break-word;
+
+    /* white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 900px; */
 }
 
 
