@@ -1,8 +1,7 @@
 // DOM elements
 const time = document.getElementById("time");
 const greeting = document.getElementById("greeting");
-// const mainIcon = document.getElementById("main-icon");
-const background_image = document.getElementById("bg").style.background;
+let background_image = document.getElementById("bg").style.background;
 //const name = document.getElementById("name");
 const focus = document.getElementById("focus");
 const quote = document.getElementById("quote");
@@ -61,14 +60,34 @@ window.addEventListener("load", () => {
         hour < 12 ? " AM" : " PM"
       }</span>`;
 
+      setGreeting(hour);
+
+
       console.log(icon);
       let newword = icon.replace(/-/g, " ").toUpperCase();
       console.log(newword);
       console.log(wordInString(newword, "cloudy"));
 
-      if (wordInString(newword, "cloudy")) {
+
+      //Build weather condition
+      if (wordInString(newword, "snow")) {
         //setInterval(drawFlakes, 30);
       }
+      else if (wordInString(newword, "rain")){
+        makeItRain()
+      } 
+      
+      else if (wordInString(newword, "sunny")){
+
+      }
+      else if (wordInString(newword, "cloudy")){
+
+      }
+      else {
+        //makeItRain()
+      }
+
+
       // setIcons
       setIcons(icon, document.querySelector(".icon"));
 
@@ -150,51 +169,105 @@ window.addEventListener("load", () => {
       }
     }
   }
+//SNOW END//
+
+//RAIN//
+function makeItRain(){ 
+canvas = document.getElementById("sky");
+
+ W = window.innerWidth;
+
+H = window.innerHeight;
+
+canvas.width = W;
+ canvas.height = H;
+  
+  if(canvas.getContext) {
+     ctx = canvas.getContext('2d');
+    var w = canvas.width;
+    var h = canvas.height;
+    ctx.strokeStyle = 'rgba(174,194,224,0.5)';
+    ctx.lineWidth = 1;
+    ctx.lineCap = 'round';
+    
+    
+    var init = [];
+    var maxParts = 1000;
+    for(var a = 0; a < maxParts; a++) {
+      init.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        l: Math.random() * 1,
+        xs: -4 + Math.random() * 4 + 2,
+        ys: Math.random() * 10 + 10
+      })
+    }
+    
+    var particles = [];
+    for(var b = 0; b < maxParts; b++) {
+      particles[b] = init[b];
+    }
+    
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      for(var c = 0; c < particles.length; c++) {
+        var p = particles[c];
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.x + p.l * p.xs, p.y + p.l * p.ys);
+        ctx.stroke();
+      }
+      move();
+    }
+    
+    function move() {
+      for(var b = 0; b < particles.length; b++) {
+        var p = particles[b];
+        p.x += p.xs;
+        p.y += p.ys;
+        if(p.x > w || p.y > h) {
+          p.x = Math.random() * w;
+          p.y = -20;
+        }
+      }
+    }
+    
+    setInterval(draw, 30);
+    
+  }
+}
+
+//RAIN END//
 
 //set background
-function setGreeting() {
-  let today = new Date();
-  let hour = today.getHours();
-
+function setGreeting(hour) {
+  //let today = new Date();
+  //let hour = today.getHours();
+ console.log("From Greeting: "+ hour);
   if (hour < 12) {
     // greeting.textContent = "Good morning!";
-    background_image = "url('/img/clear_blue_sky.svg') center/cover";
-    // background_image.style.background = `url(/img/tomato.svg) no-repeat center/cover;`
+    document.getElementById("bg").style.background = "url('/img/clear_blue_sky.svg') center/cover"
+   
+    console.log(background_image)
+     //background_image.style.background = `url(/img/tomato.svg) no-repeat center/cover;`
   } else if (hour < 18) {
+    document.getElementById("bg").style.background = "url('/img/background_night.svg') center/cover"
+
     // greeting.textContent = "Good afternoon!";
     // mainIcon.src = `img/post-meridiem.svg`
   } else {
+    document.getElementById("bg").style.background = "url('/img/background_night.svg') center/cover"
+
     // greeting.textContent = "Good evening!";
     // mainIcon.src = `img/post-meridiem_evening.svg`
   }
 }
 
-setGreeting();
+
 
 });
 
-// // show time
-// function showTime() {
-//   let today = new Date();
 
-//   let hour = today.getHours();
-//   let min = today.getMinutes();
-//   let sec = today.getSeconds();
-
-//   //set AM or PM
-//   const amPm = hour >= 12 ? "PM" : "AM";
-
-//   // 12 Format
-//   hour = hour % 12 || 12;
-
-//   //Output
-//   //   time.innerHTML = `${hour}<span>:<span>${addZero(min)}<span>:<span>${addZero(
-//   //     sec
-//   //   )}`;
-//   time.innerHTML = `${hour}<span>:<span>${addZero(min)}<span>${(hour < 18 && hour > 12)? " AM":" PM" }</span>`;
-
-//   setTimeout(showTime, 1000);
-// }
 
 //Zero
 function addZero(n) {

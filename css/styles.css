@@ -58,6 +58,7 @@ img {
     height: 100vh;
     border-style: solid;
     border-color: red;
+    overflow: hidden;
 
     /* background: url(https://source.unsplash.com/collection/9279607) no-repeat center/cover; */
     /* background: url(/img/clear_blue_daytime_sky_bg.svg) no-repeat center/cover; */
@@ -233,8 +234,9 @@ margin: 1px;
     height: auto;
     margin-right : auto;
     margin-left : auto;
-    min-width : 1500px;
-    max-width : auto;
+    min-width : 1000px;
+    
+   
 
 }
 .showcase {
@@ -379,6 +381,7 @@ margin: 1px;
 .greetings {
     display: flex;
     justify-content: center;
+    justify-content: space-around;
     align-items: center;
     text-align: center;
     margin-bottom: 0rem;
@@ -386,6 +389,8 @@ margin: 1px;
     border-style: solid;
     border-color: red;
 }
+
+
 
 .greetings p {
     justify-content: center;
@@ -419,7 +424,7 @@ margin: 1px;
   
     border-style: solid;
     border-color: red;
-    max-width: 450px;
+    max-width: 600px;
     line-height: 30px;
     overflow-wrap: break-word;
 
